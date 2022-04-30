@@ -2694,21 +2694,41 @@ SWIG_Lua_dostring(lua_State *L, const char *str) {
 
 /* ------------------------------ end luarun.swg  ------------------------------ */
 
+/*  Errors in SWIG */
+#define  SWIG_UnknownError    	   -1
+#define  SWIG_IOError        	   -2
+#define  SWIG_RuntimeError   	   -3
+#define  SWIG_IndexError     	   -4
+#define  SWIG_TypeError      	   -5
+#define  SWIG_DivisionByZero 	   -6
+#define  SWIG_OverflowError  	   -7
+#define  SWIG_SyntaxError    	   -8
+#define  SWIG_ValueError     	   -9
+#define  SWIG_SystemError    	   -10
+#define  SWIG_AttributeError 	   -11
+#define  SWIG_MemoryError    	   -12
+#define  SWIG_NullReferenceError   -13
+
+
+
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_SoundWave__AudioData swig_types[0]
 #define SWIGTYPE_p_SoundWave__EncoderParams swig_types[1]
-#define SWIGTYPE_p_float swig_types[2]
-#define SWIGTYPE_p_int swig_types[3]
-#define SWIGTYPE_p_nqr__AudioData swig_types[4]
-#define SWIGTYPE_p_nqr__DitherType swig_types[5]
-#define SWIGTYPE_p_nqr__EncoderParams swig_types[6]
-#define SWIGTYPE_p_nqr__PCMFormat swig_types[7]
-#define SWIGTYPE_p_std__string swig_types[8]
-#define SWIGTYPE_p_std__vectorT_float_t swig_types[9]
-static swig_type_info *swig_types[11];
-static swig_module_info swig_module = {swig_types, 10, 0, 0, 0, 0};
+#define SWIGTYPE_p_difference_type swig_types[2]
+#define SWIGTYPE_p_float swig_types[3]
+#define SWIGTYPE_p_int swig_types[4]
+#define SWIGTYPE_p_nqr__AudioData swig_types[5]
+#define SWIGTYPE_p_nqr__DitherType swig_types[6]
+#define SWIGTYPE_p_nqr__EncoderParams swig_types[7]
+#define SWIGTYPE_p_nqr__PCMFormat swig_types[8]
+#define SWIGTYPE_p_size_type swig_types[9]
+#define SWIGTYPE_p_std__string swig_types[10]
+#define SWIGTYPE_p_std__vectorT_float_t swig_types[11]
+#define SWIGTYPE_p_value_type swig_types[12]
+static swig_type_info *swig_types[14];
+static swig_module_info swig_module = {swig_types, 13, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2727,9 +2747,770 @@ typedef struct{} LANGUAGE_OBJ;
 
 #include "nyquist.h"
 
+
+#include <string>
+
+
+SWIGINTERN int SWIG_lua_isnilstring(lua_State *L, int idx) {
+  int ret = lua_isstring(L, idx);
+  if (!ret)
+   ret = lua_isnil(L, idx);
+  return ret;
+}
+
+
+#include <vector>
+
+
+#include <typeinfo>
+#include <stdexcept>
+
+
+#define SWIG_exception(a,b)\
+{ lua_pushfstring(L,"%s:%s",#a,b);SWIG_fail; }
+
+
+#include <typeinfo>
+#include <stdexcept>
+
+SWIGINTERN float std_vector_Sl_float_Sg____getitem____SWIG(std::vector< float > *self,unsigned int idx){
+				if (idx>=self->size())
+					throw std::out_of_range("in vector::__getitem__()");
+				return (*self)[idx];
+			}
+SWIGINTERN void std_vector_Sl_float_Sg____setitem____SWIG(std::vector< float > *self,unsigned int idx,float val){
+				if (idx>=self->size())
+					throw std::out_of_range("in vector::__setitem__()");
+				(*self)[idx]=val;
+			}
 #ifdef __cplusplus
 extern "C" {
 #endif
+static int _wrap_new_string__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  std::string *result = 0 ;
+  
+  SWIG_check_num_args("std::string::string",0,0)
+  result = (std::string *)new std::string();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_std__string,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_string__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  char *arg1 = (char *) 0 ;
+  std::string *result = 0 ;
+  
+  SWIG_check_num_args("std::string::string",1,1)
+  if(!SWIG_lua_isnilstring(L,1)) SWIG_fail_arg("std::string::string",1,"char const *");
+  arg1 = (char *)lua_tostring(L, 1);
+  result = (std::string *)new std::string((char const *)arg1);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_std__string,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_string(lua_State* L) {
+  int argc;
+  int argv[2]={
+    1,2
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 0) {
+    return _wrap_new_string__SWIG_0(L);
+  }
+  if (argc == 1) {
+    int _v = 0;
+    {
+      _v = SWIG_lua_isnilstring(L,argv[0]);
+    }
+    if (_v) {
+      return _wrap_new_string__SWIG_1(L);
+    }
+  }
+  
+  SWIG_Lua_pusherrstring(L,"Wrong arguments for overloaded function 'new_string'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::string::string()\n"
+    "    std::string::string(char const *)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_string_size(lua_State* L) {
+  int SWIG_arg = 0;
+  std::string *arg1 = (std::string *) 0 ;
+  unsigned int result;
+  
+  SWIG_check_num_args("std::string::size",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::string::size",1,"std::string const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
+    SWIG_fail_ptr("string_size",1,SWIGTYPE_p_std__string);
+  }
+  
+  result = (unsigned int)((std::string const *)arg1)->size();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_string_length(lua_State* L) {
+  int SWIG_arg = 0;
+  std::string *arg1 = (std::string *) 0 ;
+  unsigned int result;
+  
+  SWIG_check_num_args("std::string::length",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::string::length",1,"std::string const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
+    SWIG_fail_ptr("string_length",1,SWIGTYPE_p_std__string);
+  }
+  
+  result = (unsigned int)((std::string const *)arg1)->length();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_string_empty(lua_State* L) {
+  int SWIG_arg = 0;
+  std::string *arg1 = (std::string *) 0 ;
+  bool result;
+  
+  SWIG_check_num_args("std::string::empty",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::string::empty",1,"std::string const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
+    SWIG_fail_ptr("string_empty",1,SWIGTYPE_p_std__string);
+  }
+  
+  result = (bool)((std::string const *)arg1)->empty();
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_string_c_str(lua_State* L) {
+  int SWIG_arg = 0;
+  std::string *arg1 = (std::string *) 0 ;
+  char *result = 0 ;
+  
+  SWIG_check_num_args("std::string::c_str",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::string::c_str",1,"std::string const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
+    SWIG_fail_ptr("string_c_str",1,SWIGTYPE_p_std__string);
+  }
+  
+  result = (char *)((std::string const *)arg1)->c_str();
+  lua_pushstring(L,(const char *)result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_string_data(lua_State* L) {
+  int SWIG_arg = 0;
+  std::string *arg1 = (std::string *) 0 ;
+  char *result = 0 ;
+  
+  SWIG_check_num_args("std::string::data",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::string::data",1,"std::string const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
+    SWIG_fail_ptr("string_data",1,SWIGTYPE_p_std__string);
+  }
+  
+  result = (char *)((std::string const *)arg1)->data();
+  lua_pushstring(L,(const char *)result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_string_assign(lua_State* L) {
+  int SWIG_arg = 0;
+  std::string *arg1 = (std::string *) 0 ;
+  char *arg2 = (char *) 0 ;
+  
+  SWIG_check_num_args("std::string::assign",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::string::assign",1,"std::string *");
+  if(!SWIG_lua_isnilstring(L,2)) SWIG_fail_arg("std::string::assign",2,"char const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
+    SWIG_fail_ptr("string_assign",1,SWIGTYPE_p_std__string);
+  }
+  
+  arg2 = (char *)lua_tostring(L, 2);
+  (arg1)->assign((char const *)arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static void swig_delete_string(void *obj) {
+std::string *arg1 = (std::string *) obj;
+delete arg1;
+}
+static int _proxy__wrap_new_string(lua_State *L) {
+    assert(lua_istable(L,1));
+    lua_pushcfunction(L,_wrap_new_string);
+    assert(!lua_isnil(L,-1));
+    lua_replace(L,1); /* replace our table with real constructor */
+    lua_call(L,lua_gettop(L)-1,1);
+    return 1;
+}
+static swig_lua_attribute swig_string_attributes[] = {
+    {0,0,0}
+};
+static swig_lua_method swig_string_methods[]= {
+    { "size", _wrap_string_size},
+    { "length", _wrap_string_length},
+    { "empty", _wrap_string_empty},
+    { "c_str", _wrap_string_c_str},
+    { "data", _wrap_string_data},
+    { "assign", _wrap_string_assign},
+    {0,0}
+};
+static swig_lua_method swig_string_meta[] = {
+    {0,0}
+};
+
+static swig_lua_attribute swig_string_Sf_SwigStatic_attributes[] = {
+    {0,0,0}
+};
+static swig_lua_const_info swig_string_Sf_SwigStatic_constants[]= {
+    {0,0,0,0,0,0}
+};
+static swig_lua_method swig_string_Sf_SwigStatic_methods[]= {
+    {0,0}
+};
+static swig_lua_class* swig_string_Sf_SwigStatic_classes[]= {
+    0
+};
+
+static swig_lua_namespace swig_string_Sf_SwigStatic = {
+    "string",
+    swig_string_Sf_SwigStatic_methods,
+    swig_string_Sf_SwigStatic_attributes,
+    swig_string_Sf_SwigStatic_constants,
+    swig_string_Sf_SwigStatic_classes,
+    0
+};
+static swig_lua_class *swig_string_bases[] = {0};
+static const char *swig_string_base_names[] = {0};
+static swig_lua_class _wrap_class_string = { "string", "string", &SWIGTYPE_p_std__string,_proxy__wrap_new_string, swig_delete_string, swig_string_methods, swig_string_attributes, &swig_string_Sf_SwigStatic, swig_string_meta, swig_string_bases, swig_string_base_names };
+
+static int _wrap_new_float_vector__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *result = 0 ;
+  
+  SWIG_check_num_args("std::vector< float >::vector",0,0)
+  result = (std::vector< float > *)new std::vector< float >();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_std__vectorT_float_t,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_float_vector__SWIG_1(lua_State* L) {
+  int SWIG_arg = 0;
+  unsigned int arg1 ;
+  std::vector< float > *result = 0 ;
+  
+  SWIG_check_num_args("std::vector< float >::vector",1,1)
+  if(!lua_isnumber(L,1)) SWIG_fail_arg("std::vector< float >::vector",1,"unsigned int");
+  SWIG_contract_assert((lua_tonumber(L,1)>=0),"number must not be negative");
+  arg1 = (unsigned int)lua_tonumber(L, 1);
+  result = (std::vector< float > *)new std::vector< float >(arg1);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_std__vectorT_float_t,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_float_vector__SWIG_2(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = 0 ;
+  std::vector< float > *result = 0 ;
+  
+  SWIG_check_num_args("std::vector< float >::vector",1,1)
+  if(!lua_isuserdata(L,1)) SWIG_fail_arg("std::vector< float >::vector",1,"std::vector< float > const &");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("new_float_vector",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  result = (std::vector< float > *)new std::vector< float >((std::vector< float > const &)*arg1);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_std__vectorT_float_t,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_float_vector__SWIG_3(lua_State* L) {
+  int SWIG_arg = 0;
+  unsigned int arg1 ;
+  float arg2 ;
+  std::vector< float > *result = 0 ;
+  
+  SWIG_check_num_args("std::vector< float >::vector",2,2)
+  if(!lua_isnumber(L,1)) SWIG_fail_arg("std::vector< float >::vector",1,"unsigned int");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("std::vector< float >::vector",2,"float");
+  SWIG_contract_assert((lua_tonumber(L,1)>=0),"number must not be negative");
+  arg1 = (unsigned int)lua_tonumber(L, 1);
+  arg2 = (float)lua_tonumber(L, 2);
+  result = (std::vector< float > *)new std::vector< float >(arg1,arg2);
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_std__vectorT_float_t,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_float_vector(lua_State* L) {
+  int argc;
+  int argv[3]={
+    1,2,3
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 0) {
+    return _wrap_new_float_vector__SWIG_0(L);
+  }
+  if (argc == 1) {
+    int _v = 0;
+    {
+      void *ptr;
+      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_std__vectorT_float_t, SWIG_POINTER_NO_NULL)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_new_float_vector__SWIG_2(L);
+    }
+  }
+  if (argc == 1) {
+    int _v = 0;
+    {
+      _v = lua_isnumber(L,argv[0]);
+    }
+    if (_v) {
+      return _wrap_new_float_vector__SWIG_1(L);
+    }
+  }
+  if (argc == 2) {
+    int _v = 0;
+    {
+      _v = lua_isnumber(L,argv[0]);
+    }
+    if (_v) {
+      {
+        _v = lua_isnumber(L,argv[1]);
+      }
+      if (_v) {
+        return _wrap_new_float_vector__SWIG_3(L);
+      }
+    }
+  }
+  
+  SWIG_Lua_pusherrstring(L,"Wrong arguments for overloaded function 'new_float_vector'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< float >::vector()\n"
+    "    std::vector< float >::vector(unsigned int)\n"
+    "    std::vector< float >::vector(std::vector< float > const &)\n"
+    "    std::vector< float >::vector(unsigned int,float)\n");
+  lua_error(L);return 0;
+}
+
+
+static int _wrap_float_vector_size(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  unsigned int result;
+  
+  SWIG_check_num_args("std::vector< float >::size",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::size",1,"std::vector< float > const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_size",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  result = (unsigned int)((std::vector< float > const *)arg1)->size();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector_max_size(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  unsigned int result;
+  
+  SWIG_check_num_args("std::vector< float >::max_size",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::max_size",1,"std::vector< float > const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_max_size",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  result = (unsigned int)((std::vector< float > const *)arg1)->max_size();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector_empty(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  bool result;
+  
+  SWIG_check_num_args("std::vector< float >::empty",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::empty",1,"std::vector< float > const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_empty",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  result = (bool)((std::vector< float > const *)arg1)->empty();
+  lua_pushboolean(L,(int)(result!=0)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector_clear(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  
+  SWIG_check_num_args("std::vector< float >::clear",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::clear",1,"std::vector< float > *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_clear",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  (arg1)->clear();
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector_push_back(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  float arg2 ;
+  
+  SWIG_check_num_args("std::vector< float >::push_back",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::push_back",1,"std::vector< float > *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("std::vector< float >::push_back",2,"float");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_push_back",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  arg2 = (float)lua_tonumber(L, 2);
+  (arg1)->push_back(arg2);
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector_pop_back(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  
+  SWIG_check_num_args("std::vector< float >::pop_back",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::pop_back",1,"std::vector< float > *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_pop_back",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  (arg1)->pop_back();
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector_front(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  float result;
+  
+  SWIG_check_num_args("std::vector< float >::front",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::front",1,"std::vector< float > const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_front",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  result = (float)((std::vector< float > const *)arg1)->front();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector_back(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  float result;
+  
+  SWIG_check_num_args("std::vector< float >::back",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::back",1,"std::vector< float > const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector_back",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  result = (float)((std::vector< float > const *)arg1)->back();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector___getitem(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  unsigned int arg2 ;
+  float result;
+  
+  SWIG_check_num_args("std::vector< float >::__getitem__",2,2)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::__getitem__",1,"std::vector< float > *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("std::vector< float >::__getitem__",2,"unsigned int");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector___getitem",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative");
+  arg2 = (unsigned int)lua_tonumber(L, 2);
+  try {
+    result = (float)std_vector_Sl_float_Sg____getitem____SWIG(arg1,arg2);
+  } catch(std::out_of_range &_e) {
+    SWIG_exception(SWIG_IndexError, (&_e)->what());
+  }
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_float_vector___setitem(lua_State* L) {
+  int SWIG_arg = 0;
+  std::vector< float > *arg1 = (std::vector< float > *) 0 ;
+  unsigned int arg2 ;
+  float arg3 ;
+  
+  SWIG_check_num_args("std::vector< float >::__setitem__",3,3)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("std::vector< float >::__setitem__",1,"std::vector< float > *");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("std::vector< float >::__setitem__",2,"unsigned int");
+  if(!lua_isnumber(L,3)) SWIG_fail_arg("std::vector< float >::__setitem__",3,"float");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__vectorT_float_t,0))){
+    SWIG_fail_ptr("float_vector___setitem",1,SWIGTYPE_p_std__vectorT_float_t);
+  }
+  
+  SWIG_contract_assert((lua_tonumber(L,2)>=0),"number must not be negative");
+  arg2 = (unsigned int)lua_tonumber(L, 2);
+  arg3 = (float)lua_tonumber(L, 3);
+  try {
+    std_vector_Sl_float_Sg____setitem____SWIG(arg1,arg2,arg3);
+  } catch(std::out_of_range &_e) {
+    SWIG_exception(SWIG_IndexError, (&_e)->what());
+  }
+  
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static void swig_delete_float_vector(void *obj) {
+std::vector< float > *arg1 = (std::vector< float > *) obj;
+delete arg1;
+}
+static int _proxy__wrap_new_float_vector(lua_State *L) {
+    assert(lua_istable(L,1));
+    lua_pushcfunction(L,_wrap_new_float_vector);
+    assert(!lua_isnil(L,-1));
+    lua_replace(L,1); /* replace our table with real constructor */
+    lua_call(L,lua_gettop(L)-1,1);
+    return 1;
+}
+static swig_lua_attribute swig_float_vector_attributes[] = {
+    {0,0,0}
+};
+static swig_lua_method swig_float_vector_methods[]= {
+    { "size", _wrap_float_vector_size},
+    { "max_size", _wrap_float_vector_max_size},
+    { "empty", _wrap_float_vector_empty},
+    { "clear", _wrap_float_vector_clear},
+    { "push_back", _wrap_float_vector_push_back},
+    { "pop_back", _wrap_float_vector_pop_back},
+    { "front", _wrap_float_vector_front},
+    { "back", _wrap_float_vector_back},
+    { "__getitem", _wrap_float_vector___getitem},
+    { "__setitem", _wrap_float_vector___setitem},
+    {0,0}
+};
+static swig_lua_method swig_float_vector_meta[] = {
+    { "__getitem", _wrap_float_vector___getitem},
+    { "__setitem", _wrap_float_vector___setitem},
+    {0,0}
+};
+
+static swig_lua_attribute swig_float_vector_Sf_SwigStatic_attributes[] = {
+    {0,0,0}
+};
+static swig_lua_const_info swig_float_vector_Sf_SwigStatic_constants[]= {
+    {0,0,0,0,0,0}
+};
+static swig_lua_method swig_float_vector_Sf_SwigStatic_methods[]= {
+    {0,0}
+};
+static swig_lua_class* swig_float_vector_Sf_SwigStatic_classes[]= {
+    0
+};
+
+static swig_lua_namespace swig_float_vector_Sf_SwigStatic = {
+    "float_vector",
+    swig_float_vector_Sf_SwigStatic_methods,
+    swig_float_vector_Sf_SwigStatic_attributes,
+    swig_float_vector_Sf_SwigStatic_constants,
+    swig_float_vector_Sf_SwigStatic_classes,
+    0
+};
+static swig_lua_class *swig_float_vector_bases[] = {0};
+static const char *swig_float_vector_base_names[] = {0};
+static swig_lua_class _wrap_class_float_vector = { "float_vector", "float_vector", &SWIGTYPE_p_std__vectorT_float_t,_proxy__wrap_new_float_vector, swig_delete_float_vector, swig_float_vector_methods, swig_float_vector_attributes, &swig_float_vector_Sf_SwigStatic, swig_float_vector_meta, swig_float_vector_bases, swig_float_vector_base_names };
+
 static int _wrap_AudioData_data_set(lua_State* L) {
   int SWIG_arg = 0;
   SoundWave::AudioData *arg1 = (SoundWave::AudioData *) 0 ;
@@ -2789,7 +3570,24 @@ fail:
 }
 
 
-static int _wrap_new_AudioData(lua_State* L) {
+static int _wrap_new_AudioData__SWIG_0(lua_State* L) {
+  int SWIG_arg = 0;
+  SoundWave::AudioData *result = 0 ;
+  
+  SWIG_check_num_args("SoundWave::AudioData::AudioData",0,0)
+  result = (SoundWave::AudioData *)new SoundWave::AudioData();
+  SWIG_NewPointerObj(L,result,SWIGTYPE_p_SoundWave__AudioData,1); SWIG_arg++; 
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_new_AudioData__SWIG_1(lua_State* L) {
   int SWIG_arg = 0;
   SoundWave::AudioData *arg1 = 0 ;
   SoundWave::AudioData *result = 0 ;
@@ -2810,6 +3608,39 @@ static int _wrap_new_AudioData(lua_State* L) {
 fail:
   lua_error(L);
   return SWIG_arg;
+}
+
+
+static int _wrap_new_AudioData(lua_State* L) {
+  int argc;
+  int argv[2]={
+    1,2
+  };
+  
+  argc = lua_gettop(L);
+  if (argc == 0) {
+    return _wrap_new_AudioData__SWIG_0(L);
+  }
+  if (argc == 1) {
+    int _v = 0;
+    {
+      void *ptr;
+      if (lua_isuserdata(L,argv[0])==0 || SWIG_ConvertPtr(L,argv[0], (void **) &ptr, SWIGTYPE_p_SoundWave__AudioData, SWIG_POINTER_NO_NULL)) {
+        _v = 0;
+      } else {
+        _v = 1;
+      }
+    }
+    if (_v) {
+      return _wrap_new_AudioData__SWIG_1(L);
+    }
+  }
+  
+  SWIG_Lua_pusherrstring(L,"Wrong arguments for overloaded function 'new_AudioData'\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    SoundWave::AudioData::AudioData()\n"
+    "    SoundWave::AudioData::AudioData(SoundWave::AudioData const &)\n");
+  lua_error(L);return 0;
 }
 
 
@@ -2945,11 +3776,32 @@ static int _wrap_AudioData_format(lua_State* L) {
     SWIG_fail_ptr("AudioData_format",1,SWIGTYPE_p_SoundWave__AudioData);
   }
   
-  result = ((SoundWave::AudioData const *)arg1)->format();
-  {
-    nqr::PCMFormat * resultptr = new nqr::PCMFormat((const nqr::PCMFormat &) result);
-    SWIG_NewPointerObj(L,(void *) resultptr,SWIGTYPE_p_nqr__PCMFormat,1); SWIG_arg++;
+  result = (nqr::PCMFormat)((SoundWave::AudioData const *)arg1)->format();
+  lua_pushnumber(L, (lua_Number)(int)(result)); SWIG_arg++;
+  return SWIG_arg;
+  
+  if(0) SWIG_fail;
+  
+fail:
+  lua_error(L);
+  return SWIG_arg;
+}
+
+
+static int _wrap_AudioData_size(lua_State* L) {
+  int SWIG_arg = 0;
+  SoundWave::AudioData *arg1 = (SoundWave::AudioData *) 0 ;
+  size_t result;
+  
+  SWIG_check_num_args("SoundWave::AudioData::size",1,1)
+  if(!SWIG_isptrtype(L,1)) SWIG_fail_arg("SoundWave::AudioData::size",1,"SoundWave::AudioData const *");
+  
+  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_SoundWave__AudioData,0))){
+    SWIG_fail_ptr("AudioData_size",1,SWIGTYPE_p_SoundWave__AudioData);
   }
+  
+  result = ((SoundWave::AudioData const *)arg1)->size();
+  lua_pushnumber(L, (lua_Number) result); SWIG_arg++;
   return SWIG_arg;
   
   if(0) SWIG_fail;
@@ -3159,6 +4011,7 @@ static swig_lua_method swig_AudioData_methods[]= {
     { "frame_size", _wrap_AudioData_frame_size},
     { "get_samples", _wrap_AudioData_get_samples},
     { "format", _wrap_AudioData_format},
+    { "size", _wrap_AudioData_size},
     { "__call", _wrap_AudioData___call},
     { "__setitem", _wrap_AudioData___setitem},
     { "__getitem", _wrap_AudioData___getitem},
@@ -3263,21 +4116,15 @@ static int _wrap_new_EncoderParams(lua_State* L) {
   int arg1 ;
   nqr::PCMFormat arg2 ;
   nqr::DitherType arg3 ;
-  nqr::PCMFormat *argp2 ;
   nqr::DitherType *argp3 ;
   SoundWave::EncoderParams *result = 0 ;
   
   SWIG_check_num_args("SoundWave::EncoderParams::EncoderParams",3,3)
   if(!lua_isnumber(L,1)) SWIG_fail_arg("SoundWave::EncoderParams::EncoderParams",1,"int");
-  if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::EncoderParams::EncoderParams",2,"nqr::PCMFormat");
+  if(!lua_isnumber(L,2)) SWIG_fail_arg("SoundWave::EncoderParams::EncoderParams",2,"nqr::PCMFormat");
   if(!lua_isuserdata(L,3)) SWIG_fail_arg("SoundWave::EncoderParams::EncoderParams",3,"nqr::DitherType");
   arg1 = (int)lua_tonumber(L, 1);
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&argp2,SWIGTYPE_p_nqr__PCMFormat,0))){
-    SWIG_fail_ptr("new_EncoderParams",2,SWIGTYPE_p_nqr__PCMFormat);
-  }
-  arg2 = *argp2;
-  
+  arg2 = (nqr::PCMFormat)(int)lua_tonumber(L, 2);
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,3,(void**)&argp3,SWIGTYPE_p_nqr__DitherType,0))){
     SWIG_fail_ptr("new_EncoderParams",3,SWIGTYPE_p_nqr__DitherType);
@@ -3423,15 +4270,12 @@ static int _wrap_WavDecoder(lua_State* L) {
   int SWIG_arg = 0;
   std::string *arg1 = 0 ;
   SoundWave::AudioData *arg2 = 0 ;
+  std::string temp1 ;
   
   SWIG_check_num_args("SoundWave::WavDecoder",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::WavDecoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::WavDecoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::WavDecoder",2,"SoundWave::AudioData &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("WavDecoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__AudioData,0))){
     SWIG_fail_ptr("WavDecoder",2,SWIGTYPE_p_SoundWave__AudioData);
@@ -3453,15 +4297,12 @@ static int _wrap_WavPackDecoder(lua_State* L) {
   int SWIG_arg = 0;
   std::string *arg1 = 0 ;
   SoundWave::AudioData *arg2 = 0 ;
+  std::string temp1 ;
   
   SWIG_check_num_args("SoundWave::WavPackDecoder",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::WavPackDecoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::WavPackDecoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::WavPackDecoder",2,"SoundWave::AudioData &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("WavPackDecoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__AudioData,0))){
     SWIG_fail_ptr("WavPackDecoder",2,SWIGTYPE_p_SoundWave__AudioData);
@@ -3483,15 +4324,12 @@ static int _wrap_VorbisDecoder(lua_State* L) {
   int SWIG_arg = 0;
   std::string *arg1 = 0 ;
   SoundWave::AudioData *arg2 = 0 ;
+  std::string temp1 ;
   
   SWIG_check_num_args("SoundWave::VorbisDecoder",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::VorbisDecoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::VorbisDecoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::VorbisDecoder",2,"SoundWave::AudioData &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("VorbisDecoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__AudioData,0))){
     SWIG_fail_ptr("VorbisDecoder",2,SWIGTYPE_p_SoundWave__AudioData);
@@ -3513,15 +4351,12 @@ static int _wrap_OpusDecoder(lua_State* L) {
   int SWIG_arg = 0;
   std::string *arg1 = 0 ;
   SoundWave::AudioData *arg2 = 0 ;
+  std::string temp1 ;
   
   SWIG_check_num_args("SoundWave::OpusDecoder",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::OpusDecoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::OpusDecoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::OpusDecoder",2,"SoundWave::AudioData &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("OpusDecoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__AudioData,0))){
     SWIG_fail_ptr("OpusDecoder",2,SWIGTYPE_p_SoundWave__AudioData);
@@ -3543,15 +4378,12 @@ static int _wrap_MusepackDecoder(lua_State* L) {
   int SWIG_arg = 0;
   std::string *arg1 = 0 ;
   SoundWave::AudioData *arg2 = 0 ;
+  std::string temp1 ;
   
   SWIG_check_num_args("SoundWave::MusepackDecoder",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::MusepackDecoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::MusepackDecoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::MusepackDecoder",2,"SoundWave::AudioData &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("MusepackDecoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__AudioData,0))){
     SWIG_fail_ptr("MusepackDecoder",2,SWIGTYPE_p_SoundWave__AudioData);
@@ -3573,15 +4405,12 @@ static int _wrap_Mp3Decoder(lua_State* L) {
   int SWIG_arg = 0;
   std::string *arg1 = 0 ;
   SoundWave::AudioData *arg2 = 0 ;
+  std::string temp1 ;
   
   SWIG_check_num_args("SoundWave::Mp3Decoder",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::Mp3Decoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::Mp3Decoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::Mp3Decoder",2,"SoundWave::AudioData &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("Mp3Decoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__AudioData,0))){
     SWIG_fail_ptr("Mp3Decoder",2,SWIGTYPE_p_SoundWave__AudioData);
@@ -3603,15 +4432,12 @@ static int _wrap_FlacDecoder(lua_State* L) {
   int SWIG_arg = 0;
   std::string *arg1 = 0 ;
   SoundWave::AudioData *arg2 = 0 ;
+  std::string temp1 ;
   
   SWIG_check_num_args("SoundWave::FlacDecoder",2,2)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::FlacDecoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::FlacDecoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::FlacDecoder",2,"SoundWave::AudioData &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("FlacDecoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__AudioData,0))){
     SWIG_fail_ptr("FlacDecoder",2,SWIGTYPE_p_SoundWave__AudioData);
@@ -3634,17 +4460,14 @@ static int _wrap_WavEncoder(lua_State* L) {
   std::string *arg1 = 0 ;
   SoundWave::EncoderParams *arg2 = 0 ;
   SoundWave::AudioData *arg3 = 0 ;
+  std::string temp1 ;
   int result;
   
   SWIG_check_num_args("SoundWave::WavEncoder",3,3)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::WavEncoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::WavEncoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::WavEncoder",2,"SoundWave::EncoderParams &");
   if(!lua_isuserdata(L,3)) SWIG_fail_arg("SoundWave::WavEncoder",3,"SoundWave::AudioData const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("WavEncoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__EncoderParams,0))){
     SWIG_fail_ptr("WavEncoder",2,SWIGTYPE_p_SoundWave__EncoderParams);
@@ -3672,17 +4495,14 @@ static int _wrap_OpusEncoder(lua_State* L) {
   std::string *arg1 = 0 ;
   SoundWave::EncoderParams *arg2 = 0 ;
   SoundWave::AudioData *arg3 = 0 ;
+  std::string temp1 ;
   int result;
   
   SWIG_check_num_args("SoundWave::OpusEncoder",3,3)
-  if(!lua_isuserdata(L,1)) SWIG_fail_arg("SoundWave::OpusEncoder",1,"std::string const &");
+  if(!lua_isstring(L,1)) SWIG_fail_arg("SoundWave::OpusEncoder",1,"std::string const &");
   if(!lua_isuserdata(L,2)) SWIG_fail_arg("SoundWave::OpusEncoder",2,"SoundWave::EncoderParams &");
   if(!lua_isuserdata(L,3)) SWIG_fail_arg("SoundWave::OpusEncoder",3,"SoundWave::AudioData const &");
-  
-  if (!SWIG_IsOK(SWIG_ConvertPtr(L,1,(void**)&arg1,SWIGTYPE_p_std__string,0))){
-    SWIG_fail_ptr("OpusEncoder",1,SWIGTYPE_p_std__string);
-  }
-  
+  temp1.assign(lua_tostring(L,1),lua_rawlen(L,1)); arg1=&temp1;
   
   if (!SWIG_IsOK(SWIG_ConvertPtr(L,2,(void**)&arg2,SWIGTYPE_p_SoundWave__EncoderParams,0))){
     SWIG_fail_ptr("OpusEncoder",2,SWIGTYPE_p_SoundWave__EncoderParams);
@@ -3709,6 +4529,15 @@ static swig_lua_attribute swig_SwigModule_attributes[] = {
     {0,0,0}
 };
 static swig_lua_const_info swig_SwigModule_constants[]= {
+    {SWIG_LUA_CONSTTAB_INT("PCM_U8", nqr::PCM_U8)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_S8", nqr::PCM_S8)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_16", nqr::PCM_16)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_24", nqr::PCM_24)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_32", nqr::PCM_32)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_64", nqr::PCM_64)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_FLT", nqr::PCM_FLT)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_DBL", nqr::PCM_DBL)},
+    {SWIG_LUA_CONSTTAB_INT("PCM_END", nqr::PCM_END)},
     {0,0,0,0,0,0}
 };
 static swig_lua_method swig_SwigModule_methods[]= {
@@ -3724,6 +4553,8 @@ static swig_lua_method swig_SwigModule_methods[]= {
     {0,0}
 };
 static swig_lua_class* swig_SwigModule_classes[]= {
+&_wrap_class_string,
+&_wrap_class_float_vector,
 &_wrap_class_AudioData,
 &_wrap_class_EncoderParams,
     0
@@ -3748,50 +4579,62 @@ static swig_lua_namespace swig_SwigModule = {
 
 static swig_type_info _swigt__p_SoundWave__AudioData = {"_p_SoundWave__AudioData", "SoundWave::AudioData *", 0, 0, (void*)&_wrap_class_AudioData, 0};
 static swig_type_info _swigt__p_SoundWave__EncoderParams = {"_p_SoundWave__EncoderParams", "SoundWave::EncoderParams *", 0, 0, (void*)&_wrap_class_EncoderParams, 0};
+static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_float = {"_p_float", "float *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_nqr__AudioData = {"_p_nqr__AudioData", "nqr::AudioData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_nqr__DitherType = {"_p_nqr__DitherType", "nqr::DitherType *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_nqr__EncoderParams = {"_p_nqr__EncoderParams", "nqr::EncoderParams *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_nqr__PCMFormat = {"_p_nqr__PCMFormat", "nqr::PCMFormat *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__vectorT_float_t = {"_p_std__vectorT_float_t", "std::vector< float > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_nqr__PCMFormat = {"_p_nqr__PCMFormat", "enum nqr::PCMFormat *|nqr::PCMFormat *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)&_wrap_class_string, 0};
+static swig_type_info _swigt__p_std__vectorT_float_t = {"_p_std__vectorT_float_t", "std::vector< float > *", 0, 0, (void*)&_wrap_class_float_vector, 0};
+static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_SoundWave__AudioData,
   &_swigt__p_SoundWave__EncoderParams,
+  &_swigt__p_difference_type,
   &_swigt__p_float,
   &_swigt__p_int,
   &_swigt__p_nqr__AudioData,
   &_swigt__p_nqr__DitherType,
   &_swigt__p_nqr__EncoderParams,
   &_swigt__p_nqr__PCMFormat,
+  &_swigt__p_size_type,
   &_swigt__p_std__string,
   &_swigt__p_std__vectorT_float_t,
+  &_swigt__p_value_type,
 };
 
 static swig_cast_info _swigc__p_SoundWave__AudioData[] = {  {&_swigt__p_SoundWave__AudioData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_SoundWave__EncoderParams[] = {  {&_swigt__p_SoundWave__EncoderParams, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_float[] = {  {&_swigt__p_float, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_nqr__AudioData[] = {  {&_swigt__p_nqr__AudioData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_nqr__DitherType[] = {  {&_swigt__p_nqr__DitherType, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_nqr__EncoderParams[] = {  {&_swigt__p_nqr__EncoderParams, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_nqr__PCMFormat[] = {  {&_swigt__p_nqr__PCMFormat, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_float_t[] = {  {&_swigt__p_std__vectorT_float_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_SoundWave__AudioData,
   _swigc__p_SoundWave__EncoderParams,
+  _swigc__p_difference_type,
   _swigc__p_float,
   _swigc__p_int,
   _swigc__p_nqr__AudioData,
   _swigc__p_nqr__DitherType,
   _swigc__p_nqr__EncoderParams,
   _swigc__p_nqr__PCMFormat,
+  _swigc__p_size_type,
   _swigc__p_std__string,
   _swigc__p_std__vectorT_float_t,
+  _swigc__p_value_type,
 };
 
 

@@ -7,3 +7,21 @@
 [submodule "dr_libs"]
 	path = dr_libs
 	url = https://github.com/mackron/dr_libs
+[submodule "sox-code"]
+	path = sox-code
+	url = https://git.code.sf.net/p/sox/code
+[submodule "libsamplerate"]
+	path = libsamplerate
+	url = https://github.com/libsndfile/libsamplerate
+[submodule "sndfile-tools"]
+	path = sndfile-tools
+	url = https://github.com/libsndfile/sndfile-tools
+[submodule "r8brain-free-src"]
+	path = r8brain-free-src
+	url = https://github.com/avaneev/r8brain-free-src
+[submodule "zita-resampler"]
+	path = zita-resampler
+	url = https://github.com/digital-stage/zita-resampler
+[submodule "clownresampler"]
+	path = clownresampler
+	url = https://github.com/Clownacy/clownresampler

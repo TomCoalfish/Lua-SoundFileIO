@@ -9,6 +9,7 @@ struct AudioData
 {
     nqr::AudioData data;
 
+    AudioData() = default;
     AudioData(const AudioData & d) { data = (nqr::AudioData&)d; }
 
     size_t channels() const { return data.channelCount; }
@@ -17,7 +18,8 @@ struct AudioData
     size_t frame_size() const { return data.frameSize; }
     std::vector<float>& get_samples() { return data.samples; }
     nqr::PCMFormat format() const { return data.sourceFormat; }
-
+    size_t size() const { return data.samples.size(); }
+    
     float& operator[](size_t i) { return data.samples[i]; }
     float& operator()(size_t i, size_t c) { return data.samples[i*data.channelCount + c]; }
     
