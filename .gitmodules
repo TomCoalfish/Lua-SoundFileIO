@@ -25,3 +25,6 @@
 [submodule "clownresampler"]
 	path = clownresampler
 	url = https://github.com/Clownacy/clownresampler
+[submodule "lua-libsox"]
+	path = lua-libsox
+	url = https://github.com/MasterVitronic/lua-libsox
